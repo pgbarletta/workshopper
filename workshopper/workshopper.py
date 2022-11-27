@@ -17,7 +17,8 @@ def write_output_nb(out_notebook: nbf.NotebookNode, out_path: Path) -> None:
     ext = out_path.name.split(".")[1]
     if ext == "ipynb":
         try:
-            nbf.write(out_notebook, out_path)
+            if len(out_notebook["cells"]) > 0:
+                nbf.write(out_notebook, out_path)
         except Exception as e:
             raise RuntimeError(f"Error when writing to {out_path}") from e
     elif ext == "py":
