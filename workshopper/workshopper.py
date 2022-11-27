@@ -33,6 +33,7 @@ def main() -> int:
     n = len(input_notebooks)
     indices: Dict[str, int] = dict.fromkeys(input_names, 0)
     out_notebook = nbf.v4.new_notebook()
+    answer = "Forward"
     while True:
         in_celdas: Dict[str, Any] = {}
         for nb, name in zip(input_notebooks, input_names):
@@ -48,7 +49,7 @@ def main() -> int:
         for name, celda in in_celdas.items():
             cli.show_cell(celda, name)
 
-        answer = cli.ask_for_cell(in_celdas)
+        answer = cli.ask_for_cell(in_celdas, answer)
         choose_nb = {f"Choose {name}": name for name in in_celdas.keys()}
         next_nb = {f"Next {name}": name for name in in_celdas.keys()}
         if choose_cell_name := choose_nb.get(answer, ""):

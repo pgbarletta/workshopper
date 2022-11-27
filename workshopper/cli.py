@@ -71,12 +71,12 @@ def main() -> Tuple[Tuple[Notebook, ...], Tuple[str, ...], Path]:
     return input_notebooks, input_names, out_path
 
 
-def ask_for_cell(celdas: Dict[str, Any]) -> str:
+def ask_for_cell(celdas: Dict[str, Any], default: str) -> str:
     choose_nb = [f"Choose {nb}" for nb in celdas.keys()]
     next_nb = [f"Next {nb}" for nb in celdas.keys()]
     choices = ["Forward", "Backwards"] + next_nb + choose_nb + ["Done"]
     return questionary.select(
-        "Select cell from notebook or move forward", choices=choices
+        "Select cell from notebook or move forward", choices=choices, default=default
     ).ask()
 
 
