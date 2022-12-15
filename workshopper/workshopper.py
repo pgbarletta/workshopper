@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 from typing import Any, Dict
+from warnings import warn
 
 import nbformat as nbf
 
@@ -19,6 +20,8 @@ def write_output_nb(out_notebook: nbf.NotebookNode, out_path: Path) -> None:
         try:
             if len(out_notebook["cells"]) > 0:
                 nbf.write(out_notebook, out_path)
+            else:
+                warn("No output.")
         except Exception as e:
             raise RuntimeError(f"Error when writing to {out_path}") from e
     elif ext == "py":
